@@ -1,0 +1,61 @@
+:root {
+    --color-success-bg: #4CAF50;
+    --color-success-text: white;
+    --color-error-bg: #f44336;
+    --color-error-text: white;
+    --color-input-border: #ccc;
+    --color-input-border-error: #f44336;
+    --notification-padding: 10px;
+    --notification-margin-top: 10px;
+    --input-margin: 5px 0;
+    --button-padding: 10px 20px;
+    --form-padding: 20px;
+    --form-border: 1px solid #ccc;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+form {
+    padding: var(--form-padding);
+    border: var(--form-border);
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+input, button {
+    margin: var(--input-margin);
+    padding: var(--button-padding);
+    border: 1px solid var(--color-input-border);
+}
+
+button {
+    cursor: pointer;
+}
+
+.notification {
+    display: none;
+    padding: var(--notification-padding);
+    margin-top: var(--notification-margin-top);
+}
+
+.notification.show {
+    display: block;
+}
+
+.notification.success {
+    background-color: var(--color-success-bg);
+    color: var(--color-success-text);
+}
+
+.notification.error {
+    background-color: var(--color-error-bg);
+    color: var(--color-error-text);
+}
+
+.error-border {
+    border-color: var(--color-input-border-error);
+}
