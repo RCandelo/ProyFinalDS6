@@ -46,4 +46,4 @@
   
     }; // fin de const App
     App.init();
-  })();
+  })()

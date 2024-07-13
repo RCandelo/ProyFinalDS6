@@ -1,27 +1,38 @@
 const jwt = require('jsonwebtoken');
-const Usuario = require('../models/User');
-const config = require('../config');
+const config = require('../config/config');
+const User = require('../models/User');
 
-exports.protectRoute = async (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-        return res.status(401).json({ message: 'Acceso no autorizado - Token no proporcionado' });
-    }
-
+const authMiddleware = async (req, res, next) => {
     try {
-        const decoded = jwt.verify(token, config.jwtSecret);
-        req.usuario = await Usuario.findById(decoded.id);
-        next();
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(401).json({ error: 'Token no proporcionado' });
+        }
+
+        const decoded = jwt.verify(token, config.secret);
+        req.user = await User.findById(decoded.userId);
+        req.userRole = decoded.role;
+
+        // Simplified Role-Based Access Control (RBAC)
+        const allowedRoles = {
+            '/api/servicios': ['provider'], // Ruta protegida solo para proveedores
+            '/api/servicios/:id': ['provider'],
+            '/inicio-proveedor': ['provider'], // Ruta protegida solo para proveedores
+            '/servicio': ['provider'], // Ruta protegida solo para proveedores
+            '/modificar-perfil': ['provider'], // Ruta protegida solo para proveedores
+            '/inicio-user': ['user'] // Add other protected routes here
+        };
+
+        // If the route is protected and the user doesn't have the required role, deny access
+        if (allowedRoles[req.path] && !allowedRoles[req.path].includes(req.userRole)) {
+            return res.status(403).json({ error: 'Acceso denegado' });
+        }
+        
+        next(); // Proceed to the next middleware or route handler
     } catch (error) {
-        res.status(401).json({ message: 'Acceso no autorizado - Token inválido' });
+        console.error(error);
+        res.status(401).json({ error: 'Token no válido', details: error.message });
     }
 };
 
-exports.authorize = (roles) => {
-    return (req, res, next) => {
-        if (!roles.includes(req.usuario.rol)) {
-            return res.status(403).json({ message: 'No tienes permisos para acceder a esta ruta' });
-        }
-        next();
-    };
-};
+module.exports = authMiddleware;

@@ -1,61 +1,91 @@
+/* Variables de colores */
 :root {
-    --color-success-bg: #4CAF50;
-    --color-success-text: white;
-    --color-error-bg: #f44336;
-    --color-error-text: white;
-    --color-input-border: #ccc;
-    --color-input-border-error: #f44336;
-    --notification-padding: 10px;
-    --notification-margin-top: 10px;
-    --input-margin: 5px 0;
-    --button-padding: 10px 20px;
-    --form-padding: 20px;
-    --form-border: 1px solid #ccc;
+  --primary-color: #3498db; /* Color primario */
+  --secondary-color: #2ecc71; /* Color secundario */
+  --danger-color: #e74c3c; /* Color de peligro */
+  --button-hover-opacity: 0.8; /* Opacidad al pasar el ratón por encima de los botones */
 }
 
+/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
 }
 
-form {
-    padding: var(--form-padding);
-    border: var(--form-border);
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+/* Estilos para la navegación */
+nav {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
 }
 
-input, button {
-    margin: var(--input-margin);
-    padding: var(--button-padding);
-    border: 1px solid var(--color-input-border);
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-button {
-    cursor: pointer;
+nav ul li {
+  display: inline-block;
+  margin-right: 10px;
 }
 
-.notification {
-    display: none;
-    padding: var(--notification-padding);
-    margin-top: var(--notification-margin-top);
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
 }
 
-.notification.show {
-    display: block;
+nav ul li a:hover {
+  text-decoration: underline;
 }
 
-.notification.success {
-    background-color: var(--color-success-bg);
-    color: var(--color-success-text);
+/* Estilos para el contenido principal */
+main {
+  padding: 20px;
 }
 
-.notification.error {
-    background-color: var(--color-error-bg);
-    color: var(--color-error-text);
+h1 {
+  color: var(--primary-color);
 }
 
-.error-border {
-    border-color: var(--color-input-border-error);
+/* Estilos para la tabla de servicios */
+#servicios-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#servicios-table th, #servicios-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#servicios-table th {
+  background-color: #f2f2f2;
+}
+
+/* Estilos para los botones */
+#servicios-table button {
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+#servicios-table button.editar {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+#servicios-table button.eliminar {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+#servicios-table button:hover {
+  opacity: var(--button-hover-opacity);
 }

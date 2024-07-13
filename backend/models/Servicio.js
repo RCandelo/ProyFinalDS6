@@ -1,42 +1,28 @@
 const mongoose = require('mongoose');
 
-const ServiceSchema = new mongoose.Schema({
-    tipoServicio: {
-        type: String,
-        required: true,
-    },
-    nombre: {
-        type: String,
-        required: true,
-    },
-    descripcion: {
-        type: String,
-        required: true,
-    },
-    amenidades: {
-        type: String,
-        required: true,
-    },
-    diasSemana: {
-        type: [String],
-        required: true,
-    },
-    horarioDesde: {
-        type: String,
-        required: true,
-    },
-    horarioHasta: {
-        type: String,
-        required: true,
-    },
-    precioHora: {
+const servicioSchema = new mongoose.Schema({
+    tipoServicio: String,
+    nombre: String,
+    descripcion: String,
+    amenidades: String,
+    diasSemana: [String],
+    horarioDesde: String,
+    horarioHasta: String,
+    precioHora: Number,
+    imagenes: [String],
+    estado: {
         type: Number,
-        required: true,
+        default: 1 // 1: activo, 0: inactivo
     },
-    imagenes: {
-        type: [String],
-        required: true,
+    creador: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
+    fechaCreacion: {
+        type: Date,
+        default: Date.now
+    }
 });
 
-module.exports = mongoose.model('Service', ServiceSchema);
+module.exports = mongoose.model('Servicio', servicioSchema);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Agregar/Editar Servicio</title>
+</head>
+<body>
+  <nav>
+    <ul id="navbar">
+      <li id="nav-inicio"><a href="/inicio-proveedor">Inicio</a></li>
+      <li id="nav-agregar-servicio"><a href="/agregar-servicio">Agregar Nuevo Servicio</a></li>
+      <li id="nav-username"></li>
+      <li id="nav-logout"><a href="#" onclick="App.handlers.logout(event)">Cerrar Sesión</a></li>    </ul>
+  </nav>
+
+  <div id="content">
+    <h1 id="form-title">Agregar Servicio</h1>
+    <div id="notification" class="notification"></div>
+    <form id="servicio-form">
+      <input type="hidden" id="servicio-id">
+      <label for="tipoServicio">Tipo de Servicio:</label>
+      <input type="text" id="tipoServicio" name="tipoServicio">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre">
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" name="descripcion"></textarea>
+      <label for="amenidades">Amenidades:</label>
+      <input type="text" id="amenidades" name="amenidades">
+      <label for="diasSemana">Días de la Semana:</label>
+      <input type="text" id="diasSemana" name="diasSemana">
+      <label for="horarioDesde">Horario Desde:</label>
+      <input type="text" id="horarioDesde" name="horarioDesde">
+      <label for="horarioHasta">Horario Hasta:</label>
+      <input type="text" id="horarioHasta" name="horarioHasta">
+      <label for="precioHora">Precio por Hora:</label>
+      <input type="number" id="precioHora" name="precioHora">
+      <label for="imagenes">Imágenes:</label>
+      <input type="text" id="imagenes" name="imagenes">
+      <button type="submit" id="submit-button">Guardar</button>
+    </form>
+  </div>
+
+  <script src="../js/addServices.js"></script>
+</body>
+</html>
